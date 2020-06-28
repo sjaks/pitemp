@@ -2,21 +2,27 @@ version: "3"
 services:
  pitemp:
   build: ./pitemp
-  volumes:
-   - ./product:usr/src/app
   ports:
    - 1337:1337
  influxdb:
   image: influxdb:latest
   volumes:
-   - ./influx-storage:/var/lib/influxdb
+   - influxdb-storage:/var/lib/influxdb
   ports:
-   - 3003:3003
+   - 8086:8086
+  environment:
+   - INFLUXDB_DB=db0
+   - INFLUXDB_ADMIN_USER=adminuser
+   - INFLUXDB_ADMIN_PASSWORD=adminpassword
  grafana:
   image: grafana/grafana:latest
   volumes:
-   - ./grafana:/var/lib/grafana
+   - grafana-storage:/var/lib/grafana
   ports:
    - 3000:3000
   depends_on:
    - influxdb
+
+volumes:
+ influxdb-storage:
+ grafana-storage:
