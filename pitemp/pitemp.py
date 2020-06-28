@@ -1,3 +1,15 @@
+#      _       _        
+#  ___ (_) __ _| | _____  sjaks@github
+# / __|| |/ _` | |/ / __| jaks.fi
+# \__ \| | (_| |   <\__ \ ------------
+# |___// |\__,_|_|\_\___/ pitemp
+#    |__/                
+#
+# BRIEF:
+# Saves temperature readings to a db
+
+from influxdb import InfluxDBClient
+
 client = InfluxDBClient(host="influxdb", port=8086)
 client.switch_database("db0")
 
