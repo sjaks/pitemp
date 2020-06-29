@@ -22,6 +22,16 @@ data = [
         "fields": {
             "temp": 20.0
         }
+    },
+    {
+        "measurement": "humidity",
+        "tags": {
+            "sensor": "inside01",
+            "location": "Hervanta"
+        },
+        "fields": {
+            "hum": 45.0
+        }
     }
 ]
 
