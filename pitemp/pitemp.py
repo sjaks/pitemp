@@ -8,23 +8,34 @@
 # BRIEF:
 # Saves temperature readings to a db
 
+import threading
 from influxdb import InfluxDBClient
 
-client = InfluxDBClient(host="influxdb", port=8086)
-client.switch_database("db0")
 
 data = [
     {
-        "measurement": "measurement",
+        "measurement": "temperature",
         "tags": {
-            "host": "server01",
-            "region": "us-west"
+            "sensor": "inside01",
+            "location": "Hervanta"
         },
-        "time": "2009-11-10T23:00:00Z",
         "fields": {
-            "value": 0.64
+            "temp": 20.0
         }
     }
 ]
 
-client.write_points(data)
+
+def setInterval(func,time):
+    e = threading.Event()
+    while not e.wait(time):
+        func()
+
+
+def value_to_db():
+    client.write_points(data)
+
+
+client = InfluxDBClient(host="influxdb", port=8086)
+client.switch_database("db0")
+setInterval(value_to_db, 5)
