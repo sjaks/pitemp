@@ -2,6 +2,9 @@ version: "3"
 services:
  pitemp:
   build: ./pitemp
+  environment:
+   - PT_INTERVAL=${PITEMPINTERVAL}
+   - PT_DATABASE=${PITEMPDATABASE}
  influxdb:
   image: influxdb:latest
   volumes:
@@ -9,9 +12,9 @@ services:
   ports:
    - 8086:8086
   environment:
-   - INFLUXDB_DB=db0
-   - INFLUXDB_ADMIN_USER=adminuser
-   - INFLUXDB_ADMIN_PASSWORD=adminpassword
+   - INFLUXDB_DB=${PITEMPDATABASE}
+   - INFLUXDB_ADMIN_USER=${PITEMPADMINUSER}
+   - INFLUXDB_ADMIN_PASSWORD=${PITEMPDBPASSWORD}
  grafana:
   image: grafana/grafana:latest
   volumes:
@@ -19,8 +22,8 @@ services:
   ports:
    - 3000:3000
   environment:
-   - GF_SECURITY_ADMIN_USER=adminuser
-   - GF_SECURITY_ADMIN_PASSWORD=adminpassword
+   - GF_SECURITY_ADMIN_USER=${PITEMPADMINUSER}
+   - GF_SECURITY_ADMIN_PASSWORD=${PITEMPGFPASSWORD}
   depends_on:
    - influxdb
 

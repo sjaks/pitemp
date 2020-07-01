@@ -8,6 +8,7 @@
 # BRIEF:
 # Saves temperature readings to a db
 
+import os
 import threading
 from influxdb import InfluxDBClient
 
@@ -47,5 +48,5 @@ def value_to_db():
 
 
 client = InfluxDBClient(host="influxdb", port=8086)
-client.switch_database("db0")
-setInterval(value_to_db, 5)
+client.switch_database(os.environ["PT_DATABASE"])
+setInterval(value_to_db, os.environ["PT_INTERVAL"])
