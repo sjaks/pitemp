@@ -23,16 +23,6 @@ data = [
         "fields": {
             "temp": 20.0
         }
-    },
-    {
-        "measurement": "humidity",
-        "tags": {
-            "sensor": "inside01",
-            "location": "Hervanta"
-        },
-        "fields": {
-            "hum": 45.0
-        }
     }
 ]
 
@@ -49,4 +39,4 @@ def value_to_db():
 
 client = InfluxDBClient(host="influxdb", port=8086)
 client.switch_database(os.environ["PT_DATABASE"])
-setInterval(value_to_db, os.environ["PT_INTERVAL"])
+setInterval(value_to_db, int(os.environ["PT_INTERVAL"]))
