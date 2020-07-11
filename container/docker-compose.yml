@@ -5,6 +5,8 @@ services:
   environment:
    - PT_INTERVAL=${PITEMPINTERVAL}
    - PT_DATABASE=${PITEMPDATABASE}
+  devices:
+   - /dev/gpiomem:/dev/gpiomem
  influxdb:
   image: influxdb:latest
   volumes:
