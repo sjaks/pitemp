@@ -23,11 +23,15 @@ services:
   image: grafana/grafana:latest
   volumes:
    - grafana-storage:/var/lib/grafana
+   - ./provisioning:/etc/grafana/provisioning
   ports:
    - 3000:3000
   environment:
    - GF_SECURITY_ADMIN_USER=${PITEMPADMINUSER}
    - GF_SECURITY_ADMIN_PASSWORD=${PITEMPGFPASSWORD}
+   - INFLUXDB_DB=${PITEMPDATABASE}
+   - INFLUXDB_ADMIN_USER=${PITEMPADMINUSER}
+   - INFLUXDB_ADMIN_PASSWORD=${PITEMPDBPASSWORD}
   depends_on:
    - influxdb
 
