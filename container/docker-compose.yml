@@ -5,6 +5,8 @@ services:
   environment:
    - PT_INTERVAL=${PITEMPINTERVAL}
    - PT_DATABASE=${PITEMPDATABASE}
+   - PT_SENSOR=${PITEMPSENSORNAME}
+   - PT_LOCATION=${PITEMPLOCATIONNAME}
   devices:
    - /dev/gpiomem:/dev/gpiomem
  influxdb:
