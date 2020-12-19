@@ -11,17 +11,19 @@
 import os
 import threading
 from influxdb import InfluxDBClient
+from w1thermsensor import W1ThermSensor
 
 
+sensor = W1ThermSensor()
 data = [
     {
         "measurement": "temperature",
         "tags": {
-            "sensor": "inside01",
-            "location": "Hervanta"
+            "sensor": os.environ["PT_SENSOR"],
+            "location": os.environ["PT_LOCATION"]
         },
         "fields": {
-            "temp": 20.0
+            "temp": -99.9
         }
     }
 ]
@@ -34,6 +36,9 @@ def setInterval(func,time):
 
 
 def value_to_db():
+    temperature = sensor.get_temperature()
+    print("Read a temperature value of " + str(temperature) + "C")
+    data[0]["fields"]["temp"] = temperature
     client.write_points(data)
 
 
