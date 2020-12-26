@@ -10,6 +10,7 @@ Raspberry Pi temperature station that
 Clone the repository with
 ```
 git clone https://github.com/sjaks/pitemp/
+cd pitemp/container
 ```
 and run
 ```
