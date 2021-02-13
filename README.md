@@ -1,6 +1,6 @@
 # pitemp
 Raspberry Pi temperature station that
-- uses a DHT11 temperature sensor
+- uses a ds18b20 temperature sensor
 - saves data into a Influx Database
 - uses Grafana to graph the temperature history
 - is written in Python
